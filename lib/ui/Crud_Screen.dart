@@ -79,7 +79,8 @@ class _HomePageState extends State<HomePage> {
                       if (value == null || value.trim().isEmpty) {
                         return "Age is required";
                       }
-                      if (int.tryParse(value) == null || int.parse(value) <= 0) {
+                      if (int.tryParse(value) == null ||
+                          int.parse(value) <= 0) {
                         return "Enter a valid age";
                       }
                       return null;
@@ -92,7 +93,8 @@ class _HomePageState extends State<HomePage> {
                       if (value == null || value.trim().isEmpty) {
                         return "Email is required";
                       }
-                      final emailRegex = RegExp(r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$");
+                      final emailRegex = RegExp(
+                          r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$");
                       if (!emailRegex.hasMatch(value)) {
                         return "Enter a valid email";
                       }
@@ -102,7 +104,8 @@ class _HomePageState extends State<HomePage> {
                   SizedBox(height: 16),
                   ElevatedButton(
                     onPressed: saveUser,
-                    child: Text(editingUser == null ? "Add User" : "Update User"),
+                    child:
+                        Text(editingUser == null ? "Add User" : "Update User"),
                   ),
                 ],
               ),
@@ -123,10 +126,13 @@ class _HomePageState extends State<HomePage> {
                       final user = state.users[index];
 
                       return Dismissible(
-                        key: Key(user.id.toString()), // A unique key for each user
-                        direction: DismissDirection.endToStart, // Swipe from right to left
+                        key: Key(user.id.toString()),
+                        // A unique key for each user
+                        direction: DismissDirection.endToStart,
+                        // Swipe from right to left
                         onDismissed: (direction) {
-                          BlocProvider.of<UserBloc>(context).add(DeleteUser(user.id!));
+                          BlocProvider.of<UserBloc>(context)
+                              .add(DeleteUser(user.id!));
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(content: Text('${user.name} deleted')),
                           );
@@ -139,10 +145,12 @@ class _HomePageState extends State<HomePage> {
                         ),
                         child: Card(
                           elevation: 4,
-                          margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                          margin:
+                              EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                           child: ListTile(
                             title: Text(user.name!),
-                            subtitle: Text("Age: ${user.age}, Email: ${user.email}"),
+                            subtitle:
+                                Text("Age: ${user.age}, Email: ${user.email}"),
                             onTap: () {
                               // Set fields for editing
                               setState(() {

@@ -23,21 +23,24 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     on<AddUser>((event, emit) async {
       await dbHelper.insertUser(event.user.toMap());
       final users = await dbHelper.getUser();
-      emit(UserLoaded(users.map((e) => User.fromMap(e)).toList())); // Emit updated list
+      emit(UserLoaded(
+          users.map((e) => User.fromMap(e)).toList())); // Emit updated list
     });
 
     // Update user event
     on<UpdateUser>((event, emit) async {
       await dbHelper.updateUser(event.user.toMap());
       final users = await dbHelper.getUser();
-      emit(UserLoaded(users.map((e) => User.fromMap(e)).toList())); // Emit updated list
+      emit(UserLoaded(
+          users.map((e) => User.fromMap(e)).toList())); // Emit updated list
     });
 
     // Delete user event
     on<DeleteUser>((event, emit) async {
       await dbHelper.deleteUser(event.id);
       final users = await dbHelper.getUser();
-      emit(UserLoaded(users.map((e) => User.fromMap(e)).toList())); // Emit updated list
+      emit(UserLoaded(
+          users.map((e) => User.fromMap(e)).toList())); // Emit updated list
     });
   }
 }
